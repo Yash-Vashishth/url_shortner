@@ -15,8 +15,9 @@ datasource db {
 }
 
 model url{
-  id
-  url
-  slug
+  id String @id @default(cuid())
+  url String @unique
+  slug String @unique
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
