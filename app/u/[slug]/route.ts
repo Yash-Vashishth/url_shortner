@@ -3,9 +3,10 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+export const runtime = "nodejs"; // ✅ ensure Node runtime
+
 export async function GET(request: NextRequest, context: any) {
-  // Context.params is always { slug: string } at runtime
-  const { slug } = (await context.params) || {}; // works whether Vercel thinks it's a Promise or not
+  const { slug } = (await context.params) || {};
 
   if (!slug) {
     return NextResponse.json({ error: "Missing slug" }, { status: 400 });

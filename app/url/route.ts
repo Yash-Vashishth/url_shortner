@@ -5,6 +5,8 @@ import { PrismaClient } from "@/app/generated/prisma";
 
 const prisma = new PrismaClient()
 
+export const runtime = "nodejs"; // 👈 important
+
 export async function GET() {
     try {
         const urls = await prisma.url.findMany({
