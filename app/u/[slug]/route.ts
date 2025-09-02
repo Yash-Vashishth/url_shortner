@@ -3,14 +3,13 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function GET(
-  request: NextRequest,
-  context: { params: Promise<{ slug: string }> }
-) {
-  const { slug } = await context.params; // ✅ works with Vercel’s type expectation
+export async function GET(  request: NextRequest,{ params }: { params: { slug: string } }) {
+  const { slug } = params;
 
   const url = await prisma.url.findUnique({
-    where: { slug },
+    where: {
+      slug
+    },
   });
 
   if (!url) {
